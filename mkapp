@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+set -x
+
+env
+
+. /usr/share/mkapp/functions
+
+init
+update
+assume lsb-base all 10
+mkdir rfs/run
+setup main nginx-light
+sed -i 's/ADD gcc-8-base_\$TARGETARCH.tar.gz \///' Dockerfile
+sed -i 's/ADD libnginx-mod-http-echo_\$TARGETARCH.tar.gz \///' Dockerfile
+finish '/' '["/usr/sbin/nginx", "-g", "daemon off;"]'
