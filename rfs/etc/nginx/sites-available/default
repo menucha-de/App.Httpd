@@ -46,6 +46,8 @@ server {
     proxy_pass        http://auth/oauth2/$path;
   }
 
+  error_page 502 /502.html;
+
   location ~ ^/assets {
     try_files $uri =404;
   }
